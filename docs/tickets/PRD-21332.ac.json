@@ -1,0 +1,237 @@
+[
+  {
+    "id": "TC1",
+    "ac": "AC1",
+    "text": "Given a valid access-token header, When supabase_list_organizations is called, Then it returns the mocked organization list (id/name) verbatim",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_list_organizations_returns_mocked_list"]
+  },
+  {
+    "id": "TC2",
+    "ac": "AC2",
+    "text": "Given a valid access-token header, When supabase_list_projects is called, Then it returns the mocked project list (ref/name/organization_id/region/status/created_at) verbatim",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_list_projects_returns_mocked_list"]
+  },
+  {
+    "id": "TC3",
+    "ac": "AC3",
+    "text": "Given a project ref, When supabase_get_project is called, Then it returns the mocked project detail record",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_get_project_returns_detail"]
+  },
+  {
+    "id": "TC4",
+    "ac": "AC4",
+    "text": "Given a project ref, When supabase_get_project_api_keys is called with no reveal argument, Then reveal=false is passed through and the mocked masked key values are returned unchanged",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_get_api_keys_defaults_to_masked"]
+  },
+  {
+    "id": "TC5",
+    "ac": "AC5",
+    "text": "Given a project ref, When supabase_get_project_api_keys is called with reveal: true, Then reveal=true is passed through and the mocked full key values are returned unchanged",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_get_api_keys_reveal_true_passes_through"]
+  },
+  {
+    "id": "TC6",
+    "ac": "AC6",
+    "text": "Given a project ref and a SQL statement, When supabase_run_sql is called, Then it POSTs {query} to /database/query and returns the mocked result rows from the 201 response",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_run_sql_posts_query_and_returns_rows"]
+  },
+  {
+    "id": "TC7",
+    "ac": "AC7",
+    "text": "Given a project ref and an invalid SQL statement, When supabase_run_sql is called against a mocked 400 response, Then a structured invalid_argument error is returned, not a raw exception",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_run_sql_syntax_error_is_structured"]
+  },
+  {
+    "id": "TC8",
+    "ac": "AC8",
+    "text": "Given a project ref and a SQL statement, When supabase_run_readonly_sql is called, Then it POSTs {query} to /database/query/read-only and returns the mocked result rows",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_run_readonly_sql_posts_query_and_returns_rows"]
+  },
+  {
+    "id": "TC9",
+    "ac": "AC9",
+    "text": "Given a project ref and a mutating SQL statement, When supabase_run_readonly_sql is called against a mocked 400 read-only-role rejection, Then a structured invalid_argument error is returned and the connector performs no SQL parsing of its own",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_run_readonly_sql_write_statement_rejected"]
+  },
+  {
+    "id": "TC10",
+    "ac": "AC10",
+    "text": "Given a project ref, When supabase_list_functions is called, Then each returned function has slug/name/status/version/created_at/updated_at",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_list_functions_returns_fields"]
+  },
+  {
+    "id": "TC11",
+    "ac": "AC11",
+    "text": "Given a project ref and a function slug, When supabase_get_function is called, Then it returns the mocked function detail record",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_get_function_returns_detail"]
+  },
+  {
+    "id": "TC12",
+    "ac": "AC12",
+    "text": "Given a project ref, a new function slug, source file(s) and an entrypoint path, When supabase_deploy_function is called, Then it builds a multipart body (file + metadata with entrypoint_path) and returns the mocked created record",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_deploy_function_creates_new_slug"]
+  },
+  {
+    "id": "TC13",
+    "ac": "AC13",
+    "text": "Given a project ref and an existing function slug, When supabase_deploy_function is called with the same slug, Then the connector sends the same multipart deploy call (no separate create/update branch) and returns the mocked updated record",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_deploy_function_updates_existing_slug"]
+  },
+  {
+    "id": "TC14",
+    "ac": "AC14",
+    "text": "Given a project ref, When supabase_list_branches is called, Then each returned branch has id/name/parent_id/is_default/persistent/status",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_list_branches_returns_fields"]
+  },
+  {
+    "id": "TC15",
+    "ac": "AC15",
+    "text": "Given a project ref and a branch name, When supabase_get_branch is called, Then it returns the mocked branch detail record",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_get_branch_returns_detail"]
+  },
+  {
+    "id": "TC16",
+    "ac": "AC16",
+    "text": "Given a project ref and a branch name, When supabase_create_branch is called, Then it POSTs the branch body and returns the mocked created branch record",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_create_branch_returns_record"]
+  },
+  {
+    "id": "TC17",
+    "ac": "AC17",
+    "text": "Given a project ref and a branch, When supabase_delete_branch is called without confirm:true, Then no call reaches Supabase and the tool returns a confirmation-required error",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_delete_branch_without_confirm_is_rejected"]
+  },
+  {
+    "id": "TC18",
+    "ac": "AC18",
+    "text": "Given a project ref and a branch, When supabase_delete_branch is called with confirm:true, Then Supabase's DELETE /v1/branches/{id} is called and success is returned",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_delete_branch_with_confirm_calls_delete"]
+  },
+  {
+    "id": "TC19",
+    "ac": "AC19",
+    "text": "Given a project ref, When supabase_list_secrets is called, Then each returned secret has name/value/updated_at exactly as the mocked response has them, and none of those values appear in any captured log line",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_list_secrets_returns_values_not_logged"]
+  },
+  {
+    "id": "TC20",
+    "ac": "AC20",
+    "text": "Given a project ref and name/value pairs, When supabase_create_secrets is called, Then it POSTs the array body and returns the mocked confirmation; a mocked 400 (reserved SUPABASE_ prefix) surfaces as a structured invalid_argument error",
+    "type": "auto",
+    "tests": [
+      "tests/test_tools.py::test_create_secrets_posts_array_and_returns_confirmation",
+      "tests/test_tools.py::test_create_secrets_reserved_prefix_rejected"
+    ]
+  },
+  {
+    "id": "TC21",
+    "ac": "AC21",
+    "text": "Given a project ref and secret names, When supabase_delete_secrets is called without confirm:true, Then no call reaches Supabase and the tool returns a confirmation-required error",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_delete_secrets_without_confirm_is_rejected"]
+  },
+  {
+    "id": "TC22",
+    "ac": "AC22",
+    "text": "Given a project ref and secret names, When supabase_delete_secrets is called with confirm:true, Then Supabase's bulk DELETE /v1/projects/{ref}/secrets is called and success is returned",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_delete_secrets_with_confirm_calls_delete"]
+  },
+  {
+    "id": "TC23",
+    "ac": "AC23",
+    "text": "Given no X-Supabase-Access-Token header, When any tool is called, Then a structured 401 naming the header is returned and the mocked upstream records zero calls",
+    "type": "auto",
+    "tests": ["tests/test_middleware.py::test_missing_header_returns_401_no_upstream_call"]
+  },
+  {
+    "id": "TC24",
+    "ac": "AC24",
+    "text": "Given a mocked 401/403 upstream response, When any tool is called, Then a structured error is returned, not a stack trace",
+    "type": "auto",
+    "tests": ["tests/test_tools.py::test_upstream_401_403_surfaced_as_structured_error"]
+  },
+  {
+    "id": "TC25",
+    "ac": "AC25",
+    "text": "Given two concurrent requests with two different X-Supabase-Access-Token values, When each is handled, Then each only sees the mocked response wired to its own token and no shared module-level state is read or written across the two",
+    "type": "auto",
+    "tests": ["tests/test_middleware.py::test_concurrent_requests_do_not_share_credentials"]
+  },
+  {
+    "id": "TC26",
+    "ac": "AC1, AC2, AC3",
+    "text": "Given a real free-tier Supabase account, When organizations/projects are listed and one project's details are fetched through the connector, Then the returned records match what the Supabase Dashboard shows",
+    "type": "manual",
+    "steps": [
+      "Configure a real Supabase personal access token in the X-Supabase-Access-Token header",
+      "Call supabase_list_organizations, supabase_list_projects, supabase_get_project against that account",
+      "Open the same account/project in the Supabase Dashboard"
+    ],
+    "expect": "Every id/name/ref/status field returned by the tools matches the Dashboard's display for the same account/project",
+    "result": "untested",
+    "notes": "needs a real vendor account; no Supabase credentials are configured in this pipeline's environment (SOP: not a blocker)"
+  },
+  {
+    "id": "TC27",
+    "ac": "AC6, AC8",
+    "text": "Given a real Supabase project, When a real read-write SQL statement (e.g. create table) is run via supabase_run_sql and then a select is run via supabase_run_readonly_sql, Then the create is reflected in the Dashboard's Table Editor and the select returns the row",
+    "type": "manual",
+    "steps": [
+      "Call supabase_run_sql on a real project with a `create table` / `insert` statement",
+      "Confirm the table/row in the Supabase Dashboard's Table Editor",
+      "Call supabase_run_readonly_sql with a `select` against the same table"
+    ],
+    "expect": "Table/row appears in the Dashboard after the write; the read-only select returns the inserted row",
+    "result": "untested",
+    "notes": "needs a real vendor account; no Supabase credentials are configured in this pipeline's environment (SOP: not a blocker)"
+  },
+  {
+    "id": "TC28",
+    "ac": "AC16, AC18",
+    "text": "Given a real Supabase project, When a branch is created and then deleted with confirm:true, Then both are reflected in the Supabase Dashboard",
+    "type": "manual",
+    "steps": [
+      "Call supabase_create_branch on a real project",
+      "Confirm the branch appears in the Supabase Dashboard",
+      "Call supabase_delete_branch with confirm:true",
+      "Confirm the branch disappears from the Dashboard"
+    ],
+    "expect": "Branch appears after create, disappears after the confirmed delete",
+    "result": "untested",
+    "notes": "needs a real vendor account; no Supabase credentials are configured in this pipeline's environment (SOP: not a blocker)"
+  },
+  {
+    "id": "TC29",
+    "ac": "AC12",
+    "text": "Given a real Supabase project, When a trivial Edge Function is deployed via supabase_deploy_function, Then it appears under Edge Functions in the Dashboard and responds when invoked",
+    "type": "manual",
+    "steps": [
+      "Call supabase_deploy_function on a real project with a minimal \"hello world\" function source",
+      "Confirm the function appears under Edge Functions in the Supabase Dashboard",
+      "Invoke the deployed function's URL"
+    ],
+    "expect": "Function appears in the Dashboard and returns a successful response when invoked",
+    "result": "untested",
+    "notes": "needs a real vendor account; no Supabase credentials are configured in this pipeline's environment (SOP: not a blocker)"
+  }
+]
