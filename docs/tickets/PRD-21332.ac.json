@@ -4,133 +4,209 @@
     "ac": "AC1",
     "text": "Given a valid access-token header, When supabase_list_organizations is called, Then it returns the mocked organization list (id/name) verbatim",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_list_organizations_returns_mocked_list"]
+    "tests": [
+      "tests/test_tools.py::test_list_organizations_returns_mocked_list"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_list_organizations_returns_mocked_list PASSED (.tdd/pytest_verbose.log line 43)"
   },
   {
     "id": "TC2",
     "ac": "AC2",
     "text": "Given a valid access-token header, When supabase_list_projects is called, Then it returns the mocked project list (ref/name/organization_id/region/status/created_at) verbatim",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_list_projects_returns_mocked_list"]
+    "tests": [
+      "tests/test_tools.py::test_list_projects_returns_mocked_list"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_list_projects_returns_mocked_list PASSED (.tdd/pytest_verbose.log line 44)"
   },
   {
     "id": "TC3",
     "ac": "AC3",
     "text": "Given a project ref, When supabase_get_project is called, Then it returns the mocked project detail record",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_get_project_returns_detail"]
+    "tests": [
+      "tests/test_tools.py::test_get_project_returns_detail"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_get_project_returns_detail PASSED (.tdd/pytest_verbose.log line 45)"
   },
   {
     "id": "TC4",
     "ac": "AC4",
     "text": "Given a project ref, When supabase_get_project_api_keys is called with no reveal argument, Then reveal=false is passed through and the mocked masked key values are returned unchanged",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_get_api_keys_defaults_to_masked"]
+    "tests": [
+      "tests/test_tools.py::test_get_api_keys_defaults_to_masked"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_get_api_keys_defaults_to_masked PASSED (.tdd/pytest_verbose.log line 46)"
   },
   {
     "id": "TC5",
     "ac": "AC5",
     "text": "Given a project ref, When supabase_get_project_api_keys is called with reveal: true, Then reveal=true is passed through and the mocked full key values are returned unchanged",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_get_api_keys_reveal_true_passes_through"]
+    "tests": [
+      "tests/test_tools.py::test_get_api_keys_reveal_true_passes_through"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_get_api_keys_reveal_true_passes_through PASSED (.tdd/pytest_verbose.log line 47)"
   },
   {
     "id": "TC6",
     "ac": "AC6",
     "text": "Given a project ref and a SQL statement, When supabase_run_sql is called, Then it POSTs {query} to /database/query and returns the mocked result rows from the 201 response",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_run_sql_posts_query_and_returns_rows"]
+    "tests": [
+      "tests/test_tools.py::test_run_sql_posts_query_and_returns_rows"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_run_sql_posts_query_and_returns_rows PASSED (.tdd/pytest_verbose.log line 48)"
   },
   {
     "id": "TC7",
     "ac": "AC7",
     "text": "Given a project ref and an invalid SQL statement, When supabase_run_sql is called against a mocked 400 response, Then a structured invalid_argument error is returned, not a raw exception",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_run_sql_syntax_error_is_structured"]
+    "tests": [
+      "tests/test_tools.py::test_run_sql_syntax_error_is_structured"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_run_sql_syntax_error_is_structured PASSED (.tdd/pytest_verbose.log line 49)"
   },
   {
     "id": "TC8",
     "ac": "AC8",
     "text": "Given a project ref and a SQL statement, When supabase_run_readonly_sql is called, Then it POSTs {query} to /database/query/read-only and returns the mocked result rows",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_run_readonly_sql_posts_query_and_returns_rows"]
+    "tests": [
+      "tests/test_tools.py::test_run_readonly_sql_posts_query_and_returns_rows"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_run_readonly_sql_posts_query_and_returns_rows PASSED (.tdd/pytest_verbose.log line 50)"
   },
   {
     "id": "TC9",
     "ac": "AC9",
     "text": "Given a project ref and a mutating SQL statement, When supabase_run_readonly_sql is called against a mocked 400 read-only-role rejection, Then a structured invalid_argument error is returned and the connector performs no SQL parsing of its own",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_run_readonly_sql_write_statement_rejected"]
+    "tests": [
+      "tests/test_tools.py::test_run_readonly_sql_write_statement_rejected"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_run_readonly_sql_write_statement_rejected PASSED (.tdd/pytest_verbose.log line 51)"
   },
   {
     "id": "TC10",
     "ac": "AC10",
     "text": "Given a project ref, When supabase_list_functions is called, Then each returned function has slug/name/status/version/created_at/updated_at",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_list_functions_returns_fields"]
+    "tests": [
+      "tests/test_tools.py::test_list_functions_returns_fields"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_list_functions_returns_fields PASSED (.tdd/pytest_verbose.log line 52)"
   },
   {
     "id": "TC11",
     "ac": "AC11",
     "text": "Given a project ref and a function slug, When supabase_get_function is called, Then it returns the mocked function detail record",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_get_function_returns_detail"]
+    "tests": [
+      "tests/test_tools.py::test_get_function_returns_detail"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_get_function_returns_detail PASSED (.tdd/pytest_verbose.log line 53)"
   },
   {
     "id": "TC12",
     "ac": "AC12",
     "text": "Given a project ref, a new function slug, source file(s) and an entrypoint path, When supabase_deploy_function is called, Then it builds a multipart body (file + metadata with entrypoint_path) and returns the mocked created record",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_deploy_function_creates_new_slug"]
+    "tests": [
+      "tests/test_tools.py::test_deploy_function_creates_new_slug"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_deploy_function_creates_new_slug PASSED (.tdd/pytest_verbose.log line 54)"
   },
   {
     "id": "TC13",
     "ac": "AC13",
     "text": "Given a project ref and an existing function slug, When supabase_deploy_function is called with the same slug, Then the connector sends the same multipart deploy call (no separate create/update branch) and returns the mocked updated record",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_deploy_function_updates_existing_slug"]
+    "tests": [
+      "tests/test_tools.py::test_deploy_function_updates_existing_slug"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_deploy_function_updates_existing_slug PASSED (.tdd/pytest_verbose.log line 55)"
   },
   {
     "id": "TC14",
     "ac": "AC14",
     "text": "Given a project ref, When supabase_list_branches is called, Then each returned branch has id/name/parent_id/is_default/persistent/status",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_list_branches_returns_fields"]
+    "tests": [
+      "tests/test_tools.py::test_list_branches_returns_fields"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_list_branches_returns_fields PASSED (.tdd/pytest_verbose.log line 56)"
   },
   {
     "id": "TC15",
     "ac": "AC15",
     "text": "Given a project ref and a branch name, When supabase_get_branch is called, Then it returns the mocked branch detail record",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_get_branch_returns_detail"]
+    "tests": [
+      "tests/test_tools.py::test_get_branch_returns_detail"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_get_branch_returns_detail PASSED (.tdd/pytest_verbose.log line 57)"
   },
   {
     "id": "TC16",
     "ac": "AC16",
     "text": "Given a project ref and a branch name, When supabase_create_branch is called, Then it POSTs the branch body and returns the mocked created branch record",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_create_branch_returns_record"]
+    "tests": [
+      "tests/test_tools.py::test_create_branch_returns_record"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_create_branch_returns_record PASSED (.tdd/pytest_verbose.log line 58)"
   },
   {
     "id": "TC17",
     "ac": "AC17",
     "text": "Given a project ref and a branch, When supabase_delete_branch is called without confirm:true, Then no call reaches Supabase and the tool returns a confirmation-required error",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_delete_branch_without_confirm_is_rejected"]
+    "tests": [
+      "tests/test_tools.py::test_delete_branch_without_confirm_is_rejected"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_delete_branch_without_confirm_is_rejected PASSED (.tdd/pytest_verbose.log line 59)"
   },
   {
     "id": "TC18",
     "ac": "AC18",
     "text": "Given a project ref and a branch, When supabase_delete_branch is called with confirm:true, Then Supabase's DELETE /v1/branches/{id} is called and success is returned",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_delete_branch_with_confirm_calls_delete"]
+    "tests": [
+      "tests/test_tools.py::test_delete_branch_with_confirm_calls_delete"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_delete_branch_with_confirm_calls_delete PASSED (.tdd/pytest_verbose.log line 60)"
   },
   {
     "id": "TC19",
     "ac": "AC19",
     "text": "Given a project ref, When supabase_list_secrets is called, Then each returned secret has name/value/updated_at exactly as the mocked response has them, and none of those values appear in any captured log line",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_list_secrets_returns_values_not_logged"]
+    "tests": [
+      "tests/test_tools.py::test_list_secrets_returns_values_not_logged"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_list_secrets_returns_values_not_logged PASSED (.tdd/pytest_verbose.log line 61)"
   },
   {
     "id": "TC20",
@@ -140,42 +216,64 @@
     "tests": [
       "tests/test_tools.py::test_create_secrets_posts_array_and_returns_confirmation",
       "tests/test_tools.py::test_create_secrets_reserved_prefix_rejected"
-    ]
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_create_secrets_posts_array_and_returns_confirmation PASSED (line 62); test_create_secrets_reserved_prefix_rejected PASSED (.tdd/pytest_verbose.log line 63)"
   },
   {
     "id": "TC21",
     "ac": "AC21",
     "text": "Given a project ref and secret names, When supabase_delete_secrets is called without confirm:true, Then no call reaches Supabase and the tool returns a confirmation-required error",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_delete_secrets_without_confirm_is_rejected"]
+    "tests": [
+      "tests/test_tools.py::test_delete_secrets_without_confirm_is_rejected"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_delete_secrets_without_confirm_is_rejected PASSED (.tdd/pytest_verbose.log line 64)"
   },
   {
     "id": "TC22",
     "ac": "AC22",
     "text": "Given a project ref and secret names, When supabase_delete_secrets is called with confirm:true, Then Supabase's bulk DELETE /v1/projects/{ref}/secrets is called and success is returned",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_delete_secrets_with_confirm_calls_delete"]
+    "tests": [
+      "tests/test_tools.py::test_delete_secrets_with_confirm_calls_delete"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_delete_secrets_with_confirm_calls_delete PASSED (.tdd/pytest_verbose.log line 65)"
   },
   {
     "id": "TC23",
     "ac": "AC23",
     "text": "Given no X-Supabase-Access-Token header, When any tool is called, Then a structured 401 naming the header is returned and the mocked upstream records zero calls",
     "type": "auto",
-    "tests": ["tests/test_middleware.py::test_missing_header_returns_401_no_upstream_call"]
+    "tests": [
+      "tests/test_middleware.py::test_missing_header_returns_401_no_upstream_call"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_middleware.py::test_missing_header_returns_401_no_upstream_call[headers0/1/2] PASSED (.tdd/pytest_verbose.log lines 33-35); also confirmed live (see Self-test smoke test row)"
   },
   {
     "id": "TC24",
     "ac": "AC24",
     "text": "Given a mocked 401/403 upstream response, When any tool is called, Then a structured error is returned, not a stack trace",
     "type": "auto",
-    "tests": ["tests/test_tools.py::test_upstream_401_403_surfaced_as_structured_error"]
+    "tests": [
+      "tests/test_tools.py::test_upstream_401_403_surfaced_as_structured_error"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_tools.py::test_upstream_401_403_surfaced_as_structured_error PASSED (.tdd/pytest_verbose.log line 66); also confirmed live against the real api.supabase.com host with a placeholder token (see Self-test smoke test row)"
   },
   {
     "id": "TC25",
     "ac": "AC25",
     "text": "Given two concurrent requests with two different X-Supabase-Access-Token values, When each is handled, Then each only sees the mocked response wired to its own token and no shared module-level state is read or written across the two",
     "type": "auto",
-    "tests": ["tests/test_middleware.py::test_concurrent_requests_do_not_share_credentials"]
+    "tests": [
+      "tests/test_middleware.py::test_concurrent_requests_do_not_share_credentials"
+    ],
+    "result": "pass",
+    "evidence": "uv run pytest -v -> tests/test_middleware.py::test_concurrent_requests_do_not_share_credentials PASSED (.tdd/pytest_verbose.log line 39)"
   },
   {
     "id": "TC26",
